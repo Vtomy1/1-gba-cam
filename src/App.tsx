@@ -30,6 +30,7 @@ import { PpuVramInspector } from './components/PpuVramInspector';
 import { PaletteInspector } from './components/PaletteInspector';
 import { RomHeaderViewer } from './components/RomHeaderViewer';
 import { RecordingAndStreamModal, SnapshotItem } from './components/RecordingAndStreamModal';
+import { GbaPalettePresets, PalettePreset } from './components/GbaPalettePresets';
 
 import { FilterSettings, ColorRGB555, PpuStats } from './types/gba';
 import { BUILT_IN_PALETTES, extractDynamic16Palette, createColor } from './utils/gbaColor';
@@ -451,6 +452,13 @@ export default function App() {
     });
   };
 
+  const handleSelectPreset = (preset: PalettePreset) => {
+    setActivePalette(preset.colors);
+    if (preset.paletteIdMatch) {
+      setFilterSettings((prev) => ({ ...prev, paletteId: preset.paletteIdMatch! }));
+    }
+  };
+
   const handleResetDefaults = () => {
     playBeepSound(440);
     setFilterSettings(DEFAULT_SETTINGS);
@@ -617,6 +625,11 @@ export default function App() {
         {/* Tab 3: Palette RAM (PRAM) Inspector */}
         {activeTab === 'palette' && (
           <div className="space-y-6">
+            <GbaPalettePresets
+              currentPalette={activePalette}
+              onSelectPreset={handleSelectPreset}
+            />
+
             <PaletteInspector
               palette={activePalette}
               onUpdateColor={handleUpdatePaletteColor}
