@@ -1,0 +1,6 @@
+{
+  "name": "GBA Cam PPU Studio",
+  "description": "Live 8-bit webcam streaming pipeline with Game Boy Advance PPU tile generation, Floyd-Steinberg and Bayer dithering, RGB555 palettes, and ROM header export.",
+  "requestFramePermissions": ["camera", "microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
